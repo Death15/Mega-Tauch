@@ -2,9 +2,9 @@ local NUM_MSG_MAX = 5 -- Max number of messages per TIME_CHECK seconds
 local TIME_CHECK = 5
 
 local function kick_user(user_id, chat_id)
-  local chat = 'chat#id'..chat_id
+  local channel = 'channel#id'..channel_id
   local user = 'user#id'..user_id
-  chat_del_user(chat, user, function (data, success, result)
+  channel_kick_user(chat, user, function (data, success, result)
     if success ~= 1 then
       local text = 'I can\'t kick '..data.user..' but should be kicked'
       send_msg(data.chat, '', ok_cb, nil)
@@ -53,8 +53,6 @@ local function pre_process (msg)
         local chat = msg.to.id
 
         send_msg(receiver, text, ok_cb, nil)
-        if msg.to.type ~= 'chat' and msg.to.type ~= 'channel' then
-          print("Flood in not a chat group!")
         elseif user == tostring(our_id) then
           print('I won\'t kick myself')
         elseif is_sudo(msg) then
@@ -64,7 +62,7 @@ local function pre_process (msg)
           -- TODO: Check on this plugin bans
           local bhash = 'banned:'..msg.to.id..':'..msg.from.id
           redis:set(bhash, true)
-          kick_user(user, chat)
+          channel_kick_user(user, chat)
         end
         msg = nil
       end
