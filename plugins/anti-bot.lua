@@ -45,9 +45,9 @@ local function isABotBadWay (user)
 end
 
 local function kickUser(userId, chatId)
-  local chat = 'chat#id'..chatId
+  local channel = 'channel#id'..channelId
   local user = 'user#id'..userId
-  chat_del_user(chat, user, function (data, success, result)
+  channel_del_user(channel, user, function (data, success, result)
     if success ~= 1 then
       print('I can\'t kick '..data.user..' but should be kicked')
     end
@@ -59,7 +59,7 @@ local function run (msg, matches)
   -- We wont return text if is a service msg
   if matches[1] ~= 'chat_add_user' and matches[1] ~= 'chat_add_user_link' then
     if msg.to.type ~= 'chat' and msg.to.type ~= 'channel' then
-      return 'Anti-flood works only on channels'
+      return 'Anti-flood works only on SuperGroups'
     end
   end
 
