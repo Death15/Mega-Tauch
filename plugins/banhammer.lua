@@ -11,13 +11,13 @@ local function is_chat_whitelisted(id)
 end
 
 local function kick_user(user_id, chat_id)
-  local chat = 'chat#id'..chat_id
+  local channel = 'channel#id'..channel_id
   local user = 'user#id'..user_id
 
   if user_id == tostring(our_id) then
     send_msg(chat, "I won't kick myself!", ok_cb,  true)
   else
-    chat_del_user(chat, user, ok_cb, true)
+    channel_kick_user(channel, user, ok_cb, true)
   end
 end
 
@@ -205,17 +205,18 @@ return {
     "!kick <user_id> Kick user from chat group"
   },
   patterns = {
-    "^!(whitelist) (enable)$",
-    "^!(whitelist) (disable)$",
-    "^!(whitelist) (user) (%d+)$",
-    "^!(whitelist) (chat)$",
-    "^!(whitelist) (delete) (user) (%d+)$",
-    "^!(whitelist) (delete) (chat)$",
-    "^!(ban) (user) (%d+)$",
-    "^!(ban) (delete) (%d+)$",
-    "^!(kick) (%d+)$",
+    "^#(whitelist) (enable)$",
+    "^#(whitelist) (disable)$",
+    "^#(whitelist) (user) (%d+)$",
+    "^#(whitelist) (chat)$",
+    "^#(whitelist) (delete) (user) (%d+)$",
+    "^#(whitelist) (delete) (chat)$",
+    "^#(ban) (user) (%d+)$",
+    "^#(ban) (delete) (%d+)$",
+    "^#(kick) (%d+)$",
     "^!!tgservice (.+)$",
   },
   run = run,
   pre_process = pre_process
 }
+-- BY AraashTauch For Super :)
