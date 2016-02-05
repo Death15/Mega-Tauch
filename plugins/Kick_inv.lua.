@@ -4,13 +4,13 @@ if not is_sudo(msg) then
   end
 
  if msg.to.type == 'chat'then
- if matches[1] == "kick" then
+ if matches[1] == "kickuser" then
  local chat = 'chat#'..msg.to.id
  local user = 'user#'..matches[2]
  chat_del_user(chat, user, callback, false)
  end
 
-if matches[1] == "invite" then
+if matches[1] == "inviteuser" then
 local chat = 'chat#'..msg.to.id
 local user = 'user#'..matches[2]
 chat_add_user(chat, user, callback, false)
@@ -18,14 +18,13 @@ chat_add_user(chat, user, callback, false)
 end
 
 if msg.to.type == 'channel'then
-
-if matches[1] == "kick" then
+if matches[1] == "kickuser" then
  local Channel = 'channel#'..msg.to.id
  local user = 'user#'..matches[2]
  channel_kick_user(Channel, user, ok_cb, true)
  end
 
- if matches[1] == "invite" then
+ if matches[1] == "inviteuser" then
  local Channel = 'channel#'..msg.to.id
  local user = 'user#'..matches[2]
  channel_invite_user(Channel, user, ok_cb, true)
@@ -38,8 +37,8 @@ return {
  description = "Kick and Invite SuperGroup",
  usage = {},
  patterns = {
- "^!(kick) (%d+)$",
- "^!(invite) (%d+)$"
+ "^#(kickuser) (%d+)$",
+ "^#(inviteuser) (%d+)$"
  },
 run = run
 }
