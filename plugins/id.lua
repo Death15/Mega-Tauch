@@ -50,13 +50,13 @@ local function run(msg, matches)
   -- Id of the user and info about group / channel
   if matches[1] == "!id" then
     if msg.to.type == 'channel' then
-      return ('Channel ID: %s\nUser ID: %s'):format(msg.to.id, msg.from.id)
+      return ('SuperGroup ID: %s\nYour ID: %s'):format(msg.to.id, msg.from.id)
     end
     if msg.to.type == 'chat' then
       return ('Chat ID: %s\nUser ID: %s'):format(msg.to.id, msg.from.id)
     end
     return ('User ID: %s'):format(msg.from.id)
-  elseif matches[1] == 'chat' or matches[1] == 'channel' then
+  elseif matches[1] == 'chat' or matches[1] == 'supergroup' then
     local type = matches[1]
     local chanId = matches[2]
     -- !ids? (chat) (%d+)
@@ -171,7 +171,7 @@ return {
     "^!id$",
     "^!ids? (chat) (%d+)$",
     "^!ids? (chat)$",
-    "^!ids (channel)$",
+    "^!ids (supergroup)$",
     "^!ids (channel) (%d+)$",
     "^!id (member) (@)(.+)",
     "^!id (members) (name) (.+)"
